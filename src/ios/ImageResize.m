@@ -28,11 +28,9 @@
         CGSize factors = [self calculateFactors:options originalWidth:image.size.width originalHeight: image.size.height];
         UIImage* resizedImage = [image scaleToSize:CGSizeMake(image.size.width * factors.width, image.size.height * factors.height)];
         NSData* resizedImageData = UIImageJPEGRepresentation(resizedImage, [[options objectForKey:@"quality"] floatValue]);
-
-        NSArray* paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
-        NSMutableString* filePath = [NSMutableString stringWithString: [paths objectAtIndex:0]];
-        [filePath appendString:@"/"];
-        [filePath appendFormat:@"%f.resize.jpg", [[NSDate date] timeIntervalSince1970]];
+        
+        // overwritting 
+        NSMutableString *filePath = [source mutableCopy];
 
         NSError *error = nil;
         CDVPluginResult* pluginResult = nil;
